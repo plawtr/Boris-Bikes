@@ -3,7 +3,6 @@ class Bike
 	def initialize 
 		fix
 	end
-
 	
 	def broken?
 		@broken
