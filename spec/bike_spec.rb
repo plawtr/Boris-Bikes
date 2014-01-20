@@ -2,25 +2,23 @@ require_relative "../lib/bike.rb"
 
 
 describe Bike do 
-	it "should not be broken after we create it" do
-		bike = Bike.new 
+
+	let(:bike) {Bike.new}
+
+	it "should not be broken after we create it" do 
 		expect(bike).not_to be_broken
     end
 
     it "should be able to break" do
-    	bike = Bike.new
     	bike.break
     	expect(bike).to be_broken 
     end
 
-    it "should be able to be fixed" do
-    	bike = Bike.new 
+    it "should be able to be fixed" do 
     	bike.break
     	bike.fix
     	expect(bike).not_to be_broken
     end
     
-
-
 end
 
