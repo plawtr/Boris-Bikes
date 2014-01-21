@@ -23,7 +23,9 @@ module BikeContainer
 		bikes << bike
 	end
 
-	def release(bike)
+	def release(bike)	
+		raise "You have not asked to release anything." if bike.nil?
+		raise "Not available to release." unless available_bikes.include?(bike)
 		bikes.delete(bike)
 	end
 

@@ -6,8 +6,7 @@ class DockingStation
 	include BikeContainer
 	prepend FixExtension 
 
-	def initialize(options = {})
-		
+	def initialize(options = {})	
 		self.capacity = options.fetch(:capacity, capacity)
 	end
 
