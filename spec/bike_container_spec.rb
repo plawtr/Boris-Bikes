@@ -20,8 +20,8 @@ describe BikeContainer do
 	it "should release a bike" do
 		holder.dock(bike)
 		holder.release(bike)
-  		expect(holder.available_bikes.length).to eq(0)
-		#expect(holder.bike_count).to eq(0)
+  		#expect(holder.available_bikes.length).to eq(0)
+		expect(holder.bike_count).to eq(0)
 	end
 
 	it "should know when it is full" do
@@ -78,6 +78,28 @@ describe BikeContainer do
 		holder.dock(broken_bike)
 		expect(holder.broken_bikes).to eq([broken_bike])
 	end
+
+	it "should release all broken bikes when asked" do 
+		working_bike, broken_bike1, broken_bike2 = Bike.new, Bike.new, Bike.new
+		broken_bike1.break
+		broken_bike2.break
+		holder.dock(broken_bike1)
+		holder.dock(broken_bike2)
+		holder.dock(working_bike)
+		expect(holder.release_broken).to eq([broken_bike1, broken_bike2])
+		expect(holder.available_bikes).to eq([working_bike])
+	end
+
+	it "should release all working bikes when asked" do 
+		broken_bike, working_bike1, working_bike2 = Bike.new, Bike.new, Bike.new
+		broken_bike.break
+		holder.dock(broken_bike)
+		holder.dock(working_bike1)
+		holder.dock(working_bike2)
+		expect(holder.release_working).to eq([working_bike1, working_bike2])
+		expect(holder.available_bikes).to eq([])
+	end
+
 
 end
 

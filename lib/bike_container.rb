@@ -20,7 +20,7 @@ module BikeContainer
 
 	def dock(bike)
 		raise "You have not asked to dock anything" if bike.nil?
-		raise "There is no more toom for bikes" if full?
+		raise "There is no more room for bikes" if full?
 		bikes << bike
 	end
 
@@ -44,5 +44,17 @@ module BikeContainer
 
 	def empty?
 		@bikes.empty?
+	end
+
+	def release_broken 
+		container = broken_bikes
+		@bikes-=broken_bikes
+		container	
+	end
+
+	def release_working
+		container = available_bikes
+		@bikes-=available_bikes
+		container
 	end
 end
