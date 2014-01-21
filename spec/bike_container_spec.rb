@@ -57,5 +57,27 @@ describe BikeContainer do
 		expect{holder.release("orange")}.to raise_error(RuntimeError)
 	end 
 
+	it "should not dock if asked to dock an empty thing" do
+      	expect{holder.dock()}.to raise_error(ArgumentError)
+	end
+
+	it "should not dock if asked to dock nil" do
+		expect{holder.dock(nil)}.to raise_error(RuntimeError)
+	end
+
+	it "should know when it is empty" do
+		holder.dock(bike)
+		holder.release(bike)
+		expect(holder.empty?).to eq(true)
+	end
+
+	it "should provide the list of broken bikes" do
+		working_bike, broken_bike = Bike.new, Bike.new
+		broken_bike.break
+		holder.dock(working_bike)
+		holder.dock(broken_bike)
+		expect(holder.broken_bikes).to eq([broken_bike])
+	end
+
 end
 

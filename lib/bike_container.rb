@@ -19,6 +19,7 @@ module BikeContainer
 	end
 
 	def dock(bike)
+		raise "You have not asked to dock anything" if bike.nil?
 		raise "There is no more toom for bikes" if full?
 		bikes << bike
 	end
@@ -35,5 +36,13 @@ module BikeContainer
 
 	def available_bikes 
 		bikes.reject {|bike| bike.broken? }
+	end
+
+	def broken_bikes
+		bikes.reject {|bike| !bike.broken? }
+	end
+
+	def empty?
+		@bikes.empty?
 	end
 end
